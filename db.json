@@ -1,0 +1,7 @@
+{
+    "user": "python",
+    "password": "12341234",
+    "ip": "localhost",
+    "port": "3306",
+    "db_name": "PyMenu"
+}

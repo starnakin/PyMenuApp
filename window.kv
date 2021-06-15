@@ -1,0 +1,176 @@
+WindowManager:
+    MainWindow:
+    ConnectionWindow:
+    ConnectedWindow:
+    AddWindow:
+    CreateFamilyWindow:
+    AddMemberWindow:
+
+<MainWindow>:
+    name: "home"
+    BoxLayout:
+        Button:
+            on_press: root.already_connected()
+
+<ConnectionWindow>:
+    name: "connection"
+    BoxLayout:
+        orientation: "vertical"
+        spacing: "10dp"
+        padding: ("20dp", "20dp", "20dp", "20dp")
+
+        Label:
+            text: "Family:"
+            pos_hint: {"center_x": .5}
+        TextInput:
+            pos_hint: {"center_x": .5}
+            text: 'f'
+            id: family
+            multiline: False
+            on_text_validate: root.connection(family, username, password)
+
+        Label:
+            text: "Username:"
+            pos_hint: {"center_x": .5}
+        TextInput:
+            text: "u"
+            pos_hint: {"center_x": .5}
+            id: username
+            multiline: False
+            on_text_validate: root.connection(family, username, password)
+
+        Label:
+            text: "Password"
+        TextInput:
+            text: "p"
+            pos_hint: {"center_x": .5}
+            id: password
+            multiline: False
+            on_text_validate: root.connection(family, username, password)
+
+        Button:
+            text:"Connexion"
+            pos_hint: {"center_x": .5}
+            on_press: root.connection(family, username, password)
+
+        Button:
+            text:"Create Family"
+            pos_hint: {"center_x": .5}
+            on_press: root.manager.current = "create_family"
+
+<ConnectedWindow>:
+    name: "connected"
+    BoxLayout:
+        orientation: "vertical"
+        spacing: "10dp"
+        padding: ("20dp", "20dp", "20dp", "20dp")
+        BoxLayout:
+            height: 0.3
+            Button:
+                text: "logout"
+                on_press: root.manager.current = "connection"
+                size_hint: .5, .3
+                pos_hint: {"top_y": 1}
+            Button:
+                text: "add member"
+                on_press: root.manager.current = "addmember"
+                size_hint: .5, .3
+                pos_hint: {"top_y": 1}
+
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            StackLayout:
+                orientation: "tb-lr"
+                #orientation: "vertical"
+                Button:
+                    text: "+"
+                    on_press: app.root.current = "add"
+
+<CreateFamilyWindow>:
+    name: "create_family"
+    BoxLayout:
+        orientation: "vertical"
+        spacing: "10dp"
+        padding: ("20dp", "20dp", "20dp", "20dp")
+
+        Label:
+            text: "Family name:"
+            pos_hint: {"center_x": .5}
+        TextInput:
+            text: ""
+            pos_hint: {"center_x": .5}
+            id: family
+            multiline: False
+            on_text_validate: root.create_family(family,username)
+        
+        Label:
+            text: "your username:"
+            pos_hint: {"center_x": .5}
+        TextInput:
+            text: ""
+            pos_hint: {"center_x": .5}
+            id: username
+            multiline: False
+            on_text_validate: root.create_family(family,username)
+
+        Button:
+            text:"create family"
+            pos_hint: {"center_x": .5}
+            on_press: root.create_family(family,username)
+        
+
+<AddMemberWindow>:
+    name: "addmember"
+    BoxLayout:
+        orientation: "vertical"
+        spacing: "10dp"
+        padding: ("20dp", "20dp", "20dp", "20dp")
+
+        Label:
+            text: "Username:"
+            pos_hint: {"center_x": .5}
+        TextInput:
+            text: ""
+            pos_hint: {"center_x": .5}
+            id: username
+            multiline: False
+            on_text_validate: root.add_member(username)
+        
+        Button:
+            text:"add to family"
+            pos_hint: {"center_x": .5}
+            on_press: root.add_member(username)
+
+
+<AddWindow>:
+    name: "add"
+    BoxLayout:
+        orientation: "vertical"
+        spacing: "10dp"
+        padding: ("20dp", "20dp", "20dp", "20dp")
+
+        Label:
+            text: "Element:"
+            pos_hint: {"center_x": .5}
+        TextInput:
+            text: ""
+            pos_hint: {"center_x": .5}
+            id: element
+            multiline: False
+            on_text_validate: root.add_to_list(element, quantity)
+
+        Label:
+            text: "Quantity"
+        TextInput:
+            text: ""
+            pos_hint: {"center_x": .5}
+            id: quantity
+            multiline: False
+            on_text_validate: root.add_to_list(element, quantity)
+            input_type: "number"
+
+        Button:
+            text:"add to list"
+            pos_hint: {"center_x": .5}
+            on_press: root.add_to_list(element, quantity)
